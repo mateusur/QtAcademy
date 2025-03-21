@@ -2,10 +2,8 @@ import QtQuick
 
 Window {
     id:root
-    // TODO: change the size to ensure it forms the standard business card ratio of approx 1:1.586
-    // HINT: you may wish to use a binding
 
-    width: height*1.1586
+    width: height*1.586
     height: 480
 
     visible: true
@@ -59,25 +57,34 @@ Window {
                 Image {
                     id: idPhoto
                     source: myContactInfo.photo
+                    fillMode: Image.PreserveAspectFit
+                    anchors{
+                        fill: parent
+                        margins: parent.radius
+                    }
+
                 }
             }
             Rectangle{
                 id: detailsButton
+
                 property bool checked: false
                 property bool checkable: true
+
                 signal clicked
+
                 width: 100
                 height: 50
                 anchors.left: parent.left
                 anchors.bottom: parent.bottom
                 border.width: 3
-                border.color: "black"
+                border.color: checked ? "grey" : "black"
+                radius: outter.radius
                 Text{
-                    text: "Details"
+                    text: detailsButton.checked ? "Hide details" :"Show details"
                     font.weight: Font.Bold
                     anchors.centerIn: parent
                 }
-
                 MouseArea{
                     anchors.fill: parent
                     onClicked: {
@@ -93,13 +100,10 @@ Window {
                 id: nameText
                 text: myContactInfo.name
                 font.pixelSize: 50
-                leftPadding: 15
-                topPadding: 15
             }
             Item {
                 id: basicInfo
                 anchors {
-                    // below the nameText
                     top: nameText.bottom
                     topMargin: 10
                     left: parent.left
@@ -109,25 +113,46 @@ Window {
                 Text {
                     id: address
                     text: myContactInfo.address
-                    font.pixelSize: 10
+                    font.pixelSize: 20
                 }
                 Text {
                     id: country
                     text: myContactInfo.country
-                    font.pixelSize: 10
+                    font.pixelSize: 20
                     anchors.top: address.bottom
                 }
                 Text {
                     id: phone
                     text: myContactInfo.phone
-                    font.pixelSize: 10
+                    font.pixelSize: 20
                     anchors.top: country.bottom
                 }
 
+                Item {
+                    id: details
+                    visible: detailsButton.checked
+                    anchors {
+                        top: phone.bottom
+                        // topMargin: 10
+                        left: parent.left
+                        right: parent.right
+                        bottom: parent.bottom
+                    }
+                    Text {
+                        id: email
+                        text: myContactInfo.email
+                        font.pixelSize: 20
+                    }
+                    Text {
+                        id: website
+                        text: myContactInfo.webSite
+                        font.pixelSize: 20
+                        anchors.top: email.bottom
+                    }
+                }
             }
-            Item{
-                id: details
-            }
+
+
         }
 
     }
@@ -149,13 +174,4 @@ Window {
         webSite: Qt.url("https://www.qt.io")
     }
 
-    /* Your solution should contain these key features:
-
-        - A Text element for each of the ContactInfo properties.
-        - The name and photo image should be shown all the time.
-        - These should be grouped into two categories "Basic Info" and "Details".
-        - Create a button using a MouseArea or TapHandler that can be used to
-          toggle between showing the two categories of information.
-        - Use a larger font size for the name
-    */
 }
