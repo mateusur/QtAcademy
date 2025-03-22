@@ -1,4 +1,5 @@
 import QtQuick
+import QtQml
 
 Window {
     id:root
@@ -29,6 +30,13 @@ Window {
         property string email
         property url webSite
     }
+
+    component BodyText: Text {
+        property string info: "empty"
+        text: info
+        font.pixelSize: 20
+    }
+
     Rectangle{
         id:outter
         anchors.fill: parent
@@ -110,44 +118,50 @@ Window {
                     right: parent.right
                     bottom: parent.bottom
                 }
-                Text {
+                BodyText {
                     id: address
                     text: myContactInfo.address
-                    font.pixelSize: 20
                 }
-                Text {
+                BodyText {
                     id: country
                     text: myContactInfo.country
-                    font.pixelSize: 20
                     anchors.top: address.bottom
                 }
-                Text {
+                BodyText {
                     id: phone
                     text: myContactInfo.phone
-                    font.pixelSize: 20
                     anchors.top: country.bottom
+                }
+                BodyText{
+                    id: occupation
+                    text: myContactInfo.occupation
+                    anchors.top: phone.bottom
                 }
 
                 Item {
                     id: details
                     visible: detailsButton.checked
                     anchors {
-                        top: phone.bottom
-                        // topMargin: 10
+                        top: occupation.bottom
                         left: parent.left
                         right: parent.right
                         bottom: parent.bottom
                     }
-                    Text {
+                    BodyText {
                         id: email
                         text: myContactInfo.email
-                        font.pixelSize: 20
                     }
-                    Text {
+                    BodyText {
                         id: website
                         text: myContactInfo.webSite
-                        font.pixelSize: 20
                         anchors.top: email.bottom
+                        MouseArea{
+                            anchors.fill: parent
+                            cursorShape: Qt.OpenHandCursor
+                            onClicked: {
+                                Qt.openUrlExternally(myContactInfo.webSite)
+                            }
+                        }
                     }
                 }
             }
