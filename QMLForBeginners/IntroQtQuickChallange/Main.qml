@@ -45,13 +45,17 @@ Window {
     width: 240
     height: 740
     visible: true
-    color: "black"
-
+    color: "transparent"
+    flags: Qt.FramelessWindowHint
     // the window provides a themeColor property which you
     // may use wherever you need to refer to the same color
     property color themeColor: "silver"
 
     /* Here are a few components you can use to get you going */
+    MouseArea{
+        anchors.fill: parent
+        onPressedChanged: if(pressed) window.startSystemMove()
+    }
 
     FontLoader{
         id: silkscreenBoldLoader
