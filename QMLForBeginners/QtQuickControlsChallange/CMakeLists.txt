@@ -17,6 +17,10 @@ qt_add_qml_module(appQtQuickControlsChallange
     VERSION 1.0
     QML_FILES
         Main.qml
+        QML_FILES
+        QML_FILES SinglePosition.qml
+        QML_FILES Category.qml
+        RESOURCES fonts/Kalam-Regular.ttf images/dark/cart_add.svg images/dark/cart_remove.svg images/dark/checkout.svg images/dark/mild.svg images/dark/very_hot.svg images/light/cart_add.svg images/light/cart_remove.svg images/light/checkout.svg images/light/mild.svg images/light/very_hot.svg images/curry.jpg
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
