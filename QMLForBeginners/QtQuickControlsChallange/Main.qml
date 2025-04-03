@@ -26,7 +26,7 @@ ApplicationWindow {
     height: 800
     visible: true
     title: qsTr("Gaji Baji")
-
+    readonly property real totalCost: starters.subtotal + mains.subtotal + sides.subtotal + breads.subtotal + tipSlider.value
     background: Image {
         source: Qt.resolvedUrl("images/curry.jpg")
         fillMode: Image.PreserveAspectCrop
@@ -55,8 +55,7 @@ ApplicationWindow {
         RowLayout{
             anchors.fill: parent
             Label {
-                text: qsTr("Total Order cost")
-                // color: "white"
+                text: `Total Order cost: ${window.totalCost}$`
                 font.pixelSize: 30
                 Layout.fillWidth: true
             }
@@ -211,7 +210,6 @@ ApplicationWindow {
                     }
                 }
                 Page{
-                    id:tipAmount
                     header: Label {
                         text: qsTr("Tip Amount")
                         font.pixelSize: 30
