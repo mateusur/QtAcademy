@@ -141,6 +141,98 @@ ApplicationWindow {
                 }
             }
         }
+        Pane {
+            anchors{
+                top: parent.top
+                bottom: parent.bottom
+                left: parent.horizontalCenter
+                right: parent.right
+            }
+            padding: 8
+
+            background: Rectangle {
+                color: "transparent"
+                border.color: palette.windowText
+            }
+
+            ColumnLayout{
+                anchors.fill: parent
+                Category{
+                    id: sides
+                    title: qsTr("Sides")
+                    Layout.fillWidth: true
+                    item1 {
+                        name: qsTr("Pilau Rice")
+                        cost: 10
+                    }
+                    item2 {
+                        name: qsTr("Aloo Ghobi")
+                        cost: 12
+                    }
+                    item3 {
+                        name: qsTr("Ahji Bahji")
+                        cost: 15
+                    }
+                }
+                Category{
+                    id: breads
+                    title: qsTr("Breads")
+                    Layout.fillWidth: true
+                    item1 {
+                        name: qsTr("Garlic Naan")
+                        cost: 15
+                    }
+                    item2 {
+                        name: qsTr("Keema Naan")
+                        cost: 18
+                    }
+                    item3 {
+                        name: qsTr("Naan at all")
+                        cost: 1
+                    }
+                }
+                Page{
+                    header: Label {
+                        text: qsTr("Dining Options")
+                        font.pixelSize: 30
+                    }
+                    padding: 0
+                    spacing: 8
+                    background: null
+                    RowLayout{
+                        RadioButton{
+                            text: qsTr("Eat in")
+                            checked: true
+                        }
+                        RadioButton{
+                            id: takeAway
+                            text: qsTr("Take away")
+                        }
+                    }
+                }
+                Page{
+                    id:tipAmount
+                    header: Label {
+                        text: qsTr("Tip Amount")
+                        font.pixelSize: 30
+                    }
+                    padding: 0
+                    spacing: 8
+                    background: null
+                    RowLayout{
+                        Slider{
+                            id: tipSlider
+                            from: 0
+                            to: 100
+                            stepSize: 1
+                        }
+                        Label {
+                            text: `$${tipSlider.value}`
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }
