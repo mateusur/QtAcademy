@@ -59,6 +59,12 @@ ApplicationWindow {
                 font.pixelSize: 30
                 Layout.fillWidth: true
             }
+            Button{
+                id: orderButton
+                text: qsTr("Order now")
+                enabled: window.totalCost > 0
+                onClicked: orderProcessingTimer.restart()
+            }
         }
     }
     Palette {
@@ -137,6 +143,21 @@ ApplicationWindow {
                     to: 5
                     stepSize: 1
                     Layout.alignment: Qt.AlignHCenter
+
+                    Image{
+                        source: Qt.resolvedUrl("images/light/mild.svg")
+                        anchors{
+                            bottom: parent.bottom
+                            right: parent.left
+                        }
+                    }
+                    Image {
+                        source: Qt.resolvedUrl("images/light/very_hot.svg")
+                        anchors{
+                            bottom: parent.bottom
+                            left: parent.right
+                        }
+                    }
                 }
             }
         }
@@ -233,4 +254,62 @@ ApplicationWindow {
         }
     }
 
+    Pane{
+        id:orderProcessing
+        visible: false
+        anchors.centerIn: parent
+        width: window.width / 2
+        height: window.height / 3
+
+        background: Rectangle {
+            color: palette.window
+            border.color: palette.windowText
+        }
+        ColumnLayout{
+            anchors.centerIn: parent
+            Label {
+                id: orderStatus
+                text: qsTr("Processing Order: $%1").arg(window.totalCost)
+                Layout.alignment: Qt.AlignHCenter
+            }
+            BusyIndicator{
+                running: visible
+                Layout.alignment: Qt.AlignHCenter
+            }
+        }
+    }
+    Pane{
+        id: orderProcessed
+        visible: false
+        anchors.centerIn: parent
+        width: window.width / 2
+        height: window.height / 3
+
+        background: Rectangle {
+            color: palette.window
+            border.color: palette.windowText
+        }
+
+        Label {
+            text: qsTr("Order Processed!")
+            anchors.centerIn: parent
+        }
+        TapHandler{
+            onTapped: orderProcessed.visible = false
+        }
+
+
+    }
+    Timer{
+        id: orderProcessingTimer
+        interval: 2000
+        repeat: false
+        onRunningChanged: if(running){
+                              orderProcessing.visible = true
+                          }
+        onTriggered: {
+            orderProcessed.visible = true
+            orderProcessing.visible = false
+        }
+    }
 }
