@@ -47,31 +47,51 @@ ApplicationWindow {
             Layout.fillWidth: false
             Layout.preferredWidth: 100
             Layout.alignment: Qt.AlignTop
-            name: "Bob"
         }
 
         ColumnLayout{
             id:chatInput
-            Text {
-                text: qsTr("Chatting with $")
-            }
-            Rectangle{
-                TextInput{
-                    text: "My reply"
+            Pane {
+                padding: 10
+                Label{
+                    text: `Chatting with ${Backend.chattingWith}`
+                    anchors.centerIn: parent
                 }
-                color: "gray"
-                radius: 5
-                Button{
-                    text: "Send"
-                    background: Rectangle {
-                        implicitWidth: 100
-                        implicitHeight: 40
-                        color: control.down ? "#cccccc" : "#ffffff"
-                        border.color: "#333333"
-                        radius: 5  // Higher value = more rounded
+            }
+            Pane{
+                ColumnLayout{
+                    anchors.fill: parent
+                    spacing: 10
+                    TextArea{
+                        id:textArea
+
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        background: Rectangle {
+                            color: "white"
+
+                        }
+                        placeholderText: meCheckBox.checked? "My reply" : "Their reply"
+                    }
+                    CheckBox{
+                        id: meCheckBox
+                        checked: true
+
+                    }
+                    Button{
+                        id: sendButton
+                        Layout.fillWidth: true
+                        enabled: textArea.text.length >0
+
+                        onClicked: {
+                            Backend.addReply(meCheckBox.checked, textArea.text)
+                            textArea.clear()
+                        }
                     }
                 }
             }
+
+
         }
         ColumnLayout{
             id:chatMessages
