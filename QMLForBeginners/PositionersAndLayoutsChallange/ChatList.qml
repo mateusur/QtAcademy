@@ -4,14 +4,22 @@ import QtQuick.Layouts
 
 ColumnLayout{
     id:root
-
-    required property string name
+    spacing: 10
 
     Repeater{
-        model: 6
+        model: Backend.chatModel
+
         Button{
             id: button
-            text: root.name
+
+            required property int index
+            required property string name
+
+            text: name
+
+            checked: index === Backend.currentIndex
+            onClicked: Backend.currentIndex = index
+
             checkable: true
             background : Rectangle{
                 color: button.checked ? "black" : button.pressed ? "lightgrey" : "grey"
