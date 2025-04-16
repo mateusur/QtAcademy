@@ -23,6 +23,11 @@ qt_add_qml_module(appPositionersAndLayoutsChallange
         Main.qml
         ChatList.qml
         Backend.qml
+        QML_FILES ChatName.qml
+        QML_FILES Chat.qml
+        RESOURCES sendIcon.svg
+        QML_FILES ChatBubble.qml
+        QML_FILES ChatFlickable.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

@@ -50,54 +50,27 @@ ApplicationWindow {
         }
 
         ColumnLayout{
-            id:chatInput
-            Pane {
-                padding: 10
-                Label{
-                    text: `Chatting with ${Backend.chattingWith}`
-                    anchors.centerIn: parent
-                }
-            }
-            Pane{
-                ColumnLayout{
-                    anchors.fill: parent
-                    spacing: 10
-                    TextArea{
-                        id:textArea
+            id:chat
+            spacing: 10
+            Layout.fillWidth: false
+            Layout.preferredWidth: 300
 
-                        Layout.fillHeight: true
-                        Layout.fillWidth: true
-                        background: Rectangle {
-                            color: "white"
-
-                        }
-                        placeholderText: meCheckBox.checked? "My reply" : "Their reply"
-                    }
-                    CheckBox{
-                        id: meCheckBox
-                        checked: true
-
-                    }
-                    Button{
-                        id: sendButton
-                        Layout.fillWidth: true
-                        enabled: textArea.text.length >0
-
-                        onClicked: {
-                            Backend.addReply(meCheckBox.checked, textArea.text)
-                            textArea.clear()
-                        }
-                    }
-                }
+            ChatName{
+                id:chatName
+                Layout.fillWidth: true
             }
 
-
+            Chat{
+                id:mainChatWindow
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+            }
         }
-        ColumnLayout{
-            id:chatMessages
-            Rectangle{
+        ChatFlickable{
+            id: chatFlickable
 
-            }
+            Layout.fillHeight: true
+            Layout.fillWidth: true
         }
     }
 }
