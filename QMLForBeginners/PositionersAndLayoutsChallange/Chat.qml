@@ -4,6 +4,10 @@ import QtQuick.Layouts
 
 Pane{
     id:root
+    padding: 10
+    background: GradBack{
+        color: "grey"
+    }
     ColumnLayout{
         anchors.fill: parent
         spacing: 10
@@ -14,7 +18,6 @@ Pane{
             Layout.fillWidth: true
             background: Rectangle {
                 color: "white"
-
             }
             placeholderText: meCheckBox.checked? "My reply" : "Their reply"
         }
@@ -22,7 +25,6 @@ Pane{
             CheckBox{
                 id: meCheckBox
                 checked: true
-
             }
             Button{
                 id: sendButton
@@ -39,8 +41,12 @@ Pane{
                     Backend.addReply(meCheckBox.checked, textArea.text)
                     textArea.clear()
                 }
+                background: GradBack{
+                    color: sendButton.enabled ?
+                               sendButton.pressed ? "grey" :
+                                                    "darkgrey" : "white"
+                }
             }
         }
-
     }
 }

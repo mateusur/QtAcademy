@@ -12,4 +12,7 @@ Label {
     // we adjust the background width by the wrapped text width
     rightInset: width - contentWidth - padding * 2
 
+    background: GradBack {
+        color: root.me ? Backend.myColor : Backend.theirColor
+    }
 }

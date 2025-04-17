@@ -21,7 +21,7 @@ ColumnLayout{
             onClicked: Backend.currentIndex = index
 
             checkable: true
-            background : Rectangle{
+            background : GradBack{
                 color: button.checked ? "black" : button.pressed ? "lightgrey" : "grey"
             }
             Layout.fillWidth: true

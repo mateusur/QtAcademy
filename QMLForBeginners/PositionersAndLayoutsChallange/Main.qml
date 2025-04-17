@@ -36,7 +36,9 @@ ApplicationWindow {
 
     */
     font.pixelSize: 20
-
+    background: GradBack{
+        color: Qt.alpha(Backend.theirColor,0.25)
+    }
 
     RowLayout{
         anchors.fill: parent
