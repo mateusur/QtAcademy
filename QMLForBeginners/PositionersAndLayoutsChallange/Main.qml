@@ -35,44 +35,97 @@ ApplicationWindow {
     for the chat bubbles.
 
     */
+    readonly property int mobileBreakPoint: 500
+    readonly property bool isMobileLayout: window.width <= mobileBreakPoint
+    readonly property bool isDesktopLayout: window.width > mobileBreakPoint
+
     font.pixelSize: 20
     background: GradBack{
         color: Qt.alpha(Backend.theirColor,0.25)
     }
 
-    RowLayout{
+    // RowLayout{
+    //     anchors.fill: parent
+
+    //     ChatList{
+    //         id: chatList
+
+    //         Layout.fillWidth: false
+    //         Layout.preferredWidth: 100
+    //         Layout.alignment: Qt.AlignTop
+    //     }
+
+    //     ColumnLayout{
+    //         id:chat
+    //         spacing: 10
+    //         Layout.fillWidth: false
+    //         Layout.preferredWidth: 300
+
+    //         ChatName{
+    //             id:chatName
+    //             Layout.fillWidth: true
+    //         }
+
+    //         Chat{
+    //             id:mainChatWindow
+    //             Layout.fillHeight: true
+    //             Layout.fillWidth: true
+    //         }
+    //     }
+    //     ChatFlickable{
+    //         id: chatFlickable
+
+    //         Layout.fillHeight: true
+    //         Layout.fillWidth: true
+    //     }
+    // }
+
+
+    ColumnLayout{
         anchors.fill: parent
+        TabBar {
+            id: tabBar
+            Layout.fillWidth: true
+            Repeater{
+                model: Backend.chatModel
 
-        ChatList{
-            id: chatList
-
-            Layout.fillWidth: false
-            Layout.preferredWidth: 100
-            Layout.alignment: Qt.AlignTop
-        }
-
-        ColumnLayout{
-            id:chat
-            spacing: 10
-            Layout.fillWidth: false
-            Layout.preferredWidth: 300
-
-            ChatName{
-                id:chatName
-                Layout.fillWidth: true
-            }
-
-            Chat{
-                id:mainChatWindow
-                Layout.fillHeight: true
-                Layout.fillWidth: true
+                TabButton {
+                    required property string name
+                    text: name
+                }
             }
         }
-        ChatFlickable{
-            id: chatFlickable
-
+        StackLayout{
+            //Mobile layout
+            id: stackLayout
+            currentIndex: tabBar.currentIndex
             Layout.fillHeight: true
             Layout.fillWidth: true
+            ColumnLayout{
+                    ColumnLayout{
+                        id:chat
+                        spacing: 10
+                        // Layout.fillWidth: false
+                        // Layout.preferredWidth: 300
+
+                        ChatName{
+                            id:chatName
+                            Layout.fillWidth: true
+                        }
+
+                        Chat{
+                            id:mainChatWindow
+                            // Layout.fillHeight: true
+                            Layout.fillWidth: true
+                        }
+                    }
+                    ChatFlickable{
+                        id: chatFlickable
+
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                    }
+            }
         }
     }
 }
