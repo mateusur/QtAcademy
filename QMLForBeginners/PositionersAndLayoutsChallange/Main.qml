@@ -44,51 +44,72 @@ ApplicationWindow {
         color: Qt.alpha(Backend.theirColor,0.25)
     }
 
-    // RowLayout{
-    //     anchors.fill: parent
+    ChatList{
+        id: chatList
+    }
 
-    //     ChatList{
-    //         id: chatList
+    ChatName{
+        id:chatName
+    }
 
-    //         Layout.fillWidth: false
-    //         Layout.preferredWidth: 100
-    //         Layout.alignment: Qt.AlignTop
-    //     }
+    Chat{
+        id:mainChatWindow
+    }
 
-    //     ColumnLayout{
-    //         id:chat
-    //         spacing: 10
-    //         Layout.fillWidth: false
-    //         Layout.preferredWidth: 300
+    ChatFlickable{
+        id: chatFlickable
+    }
 
-    //         ChatName{
-    //             id:chatName
-    //             Layout.fillWidth: true
-    //         }
 
-    //         Chat{
-    //             id:mainChatWindow
-    //             Layout.fillHeight: true
-    //             Layout.fillWidth: true
-    //         }
-    //     }
-    //     ChatFlickable{
-    //         id: chatFlickable
+    RowLayout{
+        visible: window.isDesktopLayout
+        anchors.fill: parent
 
-    //         Layout.fillHeight: true
-    //         Layout.fillWidth: true
-    //     }
-    // }
+        LayoutItemProxy{
+            target: chatList
+
+            Layout.fillWidth: false
+            Layout.preferredWidth: 100
+            Layout.alignment: Qt.AlignTop
+        }
+
+        ColumnLayout{
+            id:chat
+            spacing: 10
+            Layout.fillWidth: false
+            Layout.preferredWidth: 300
+
+            LayoutItemProxy{
+                target:chatName
+                Layout.fillWidth: true
+            }
+
+            LayoutItemProxy{
+                target:mainChatWindow
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+            }
+        }
+        LayoutItemProxy{
+            target: chatFlickable
+
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+        }
+    }
 
 
     ColumnLayout{
+        //Mobile layout
+        visible: window.isMobileLayout
         anchors.fill: parent
         TabBar {
             id: tabBar
             Layout.fillWidth: true
+            currentIndex: Backend.currentIndex
+            onCurrentIndexChanged: Backend.currentIndex = currentIndex
             Repeater{
                 model: Backend.chatModel
-
                 TabButton {
                     required property string name
                     text: name
@@ -96,35 +117,33 @@ ApplicationWindow {
             }
         }
         StackLayout{
-            //Mobile layout
             id: stackLayout
             currentIndex: tabBar.currentIndex
             Layout.fillHeight: true
             Layout.fillWidth: true
-            ColumnLayout{
+            Repeater{
+                model: Backend.chatModel
+                ColumnLayout{
                     ColumnLayout{
-                        id:chat
                         spacing: 10
-                        // Layout.fillWidth: false
-                        // Layout.preferredWidth: 300
 
-                        ChatName{
-                            id:chatName
+                        LayoutItemProxy{
+                            target:chatName
                             Layout.fillWidth: true
                         }
 
-                        Chat{
-                            id:mainChatWindow
-                            // Layout.fillHeight: true
+                        LayoutItemProxy{
+                            target: mainChatWindow
                             Layout.fillWidth: true
                         }
                     }
-                    ChatFlickable{
-                        id: chatFlickable
+                    LayoutItemProxy{
+                        target: chatFlickable
 
                         Layout.fillHeight: true
                         Layout.fillWidth: true
                     }
+                }
             }
         }
     }
