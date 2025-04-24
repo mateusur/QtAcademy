@@ -1,5 +1,5 @@
 import QtQuick
-import ModelViewDelegate
+// import ModelViewDelegate
 
 ListModel {
     id: weatherModel

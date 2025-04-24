@@ -1,5 +1,10 @@
 import QtQuick
-import ModelViewDelegate
+import QtQml
+
+import QtQml.Models
+
+
+// import ModelViewDelegate
 
 ListModel {
     id: locationModel
