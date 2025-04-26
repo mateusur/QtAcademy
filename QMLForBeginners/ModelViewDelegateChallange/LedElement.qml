@@ -2,11 +2,12 @@ import QtQuick
 
 Rectangle {
     id: root
-    required property int currentVolume
-    required property int treshold
-    required property color ledColor
+    required property real currentVolume
+    required property real threshold
 
-    visible: currentVolume > treshold
-    color: ledColor
+    opacity: currentVolume > threshold ? 1 : 0
+    color: Qt.hsla(threshold, 1, 0.5, 1)
+    implicitWidth: 20
+    implicitHeight: 10
 
 }
