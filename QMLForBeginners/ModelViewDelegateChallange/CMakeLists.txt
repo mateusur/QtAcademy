@@ -19,6 +19,7 @@ qt_add_qml_module(appModelViewDelegateChallange
         Main.qml
         QML_FILES LedElement.qml
         QML_FILES LedBar.qml
+        QML_FILES FrequencyVolumeGenerator.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
