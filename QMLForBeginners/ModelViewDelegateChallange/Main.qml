@@ -33,7 +33,20 @@ Window {
     reads its respective frequency level out of the model.
 
     */
-    RowLayout{
+    color: "black"
+    FrequencyVolumeGenerator {
+        id: frequencyVolumeGenerator
+    }
 
+    ListView{
+        id: root
+        anchors.fill: parent
+        model: frequencyVolumeGenerator
+        orientation: ListView.Horizontal
+        delegate: LedBar {
+            width: (ListView.view.width - (root.spacing*(root.count-1)))/root.count
+            height: ListView.view.height
+
+        }
     }
 }
