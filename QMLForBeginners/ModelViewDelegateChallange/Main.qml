@@ -1,7 +1,9 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 
 Window {
+    id: window
     width: 640
     height: 480
     visible: true
@@ -37,16 +39,35 @@ Window {
     FrequencyVolumeGenerator {
         id: frequencyVolumeGenerator
     }
-
-    ListView{
-        id: root
+    ColumnLayout{
         anchors.fill: parent
-        model: frequencyVolumeGenerator
-        orientation: ListView.Horizontal
-        delegate: LedBar {
-            width: (ListView.view.width - (root.spacing*(root.count-1)))/root.count
-            height: ListView.view.height
-
+        Slider {
+            id: slider
+            from: 10
+            value: 50
+            to: 78
+            Layout.fillWidth: true
+            height: 30
+            stepSize: 1
+            onValueChanged: {
+                console.log("value: ", value);
+            }
+        }
+        Rectangle{
+            height: window.height - slider.height
+            width: window.width
+            color: window.color
+            ListView{
+                id: root
+                anchors.fill: parent
+                model: frequencyVolumeGenerator
+                orientation: ListView.Horizontal
+                delegate: LedBar {
+                    width: (ListView.view.width - (root.spacing*(root.count-1)))/root.count
+                    height: ListView.view.height
+                    ledNumber: slider.value
+                }
+            }
         }
     }
 }
