@@ -38,6 +38,13 @@ Window {
     color: "black"
     FrequencyVolumeGenerator {
         id: frequencyVolumeGenerator
+    Rectangle{
+        id: meanVolume
+        color: "grey"
+        width: window.width
+        implicitHeight: 7
+        y: equlizer.height - (equlizer.height * frequencyVolumeGenerator.meanVolume)
+        z:1
     }
     ColumnLayout{
         anchors.fill: parent
@@ -54,6 +61,7 @@ Window {
             }
         }
         Rectangle{
+            id: equlizer
             height: window.height - slider.height
             width: window.width
             color: window.color
