@@ -60,6 +60,23 @@ Window {
                 console.log("value: ", value);
             }
         }
+        ComboBox {
+            id: comboBoxIntervals
+            height: 50
+            Layout.fillWidth: true
+            textRole: "key"
+            valueRole: "interval"
+            model: ListModel {
+                id: model
+                ListElement { key: "Fast"; interval: 25 }
+                ListElement { key: "Medium"; interval: 50 }
+                ListElement { key: "Slow"; interval: 75 }
+            }
+            currentIndex: 1
+            onCurrentValueChanged: {
+                frequencyVolumeGenerator.interval = currentValue
+            }
+        }
         Rectangle{
             id: equlizer
             height: window.height - slider.height
