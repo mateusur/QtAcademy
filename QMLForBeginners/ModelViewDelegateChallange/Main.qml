@@ -38,6 +38,8 @@ Window {
     color: "black"
     FrequencyVolumeGenerator {
         id: frequencyVolumeGenerator
+        frequencyBands: sliderNumOfFreqBands.value
+    }
     Rectangle{
         id: meanVolume
         color: "grey"
@@ -53,6 +55,18 @@ Window {
             from: 10
             value: 50
             to: 78
+            Layout.fillWidth: true
+            height: 30
+            stepSize: 1
+            onValueChanged: {
+                console.log("value: ", value);
+            }
+        }
+        Slider {
+            id: sliderNumOfFreqBands
+            from: 10
+            value: 50
+            to: 100
             Layout.fillWidth: true
             height: 30
             stepSize: 1
@@ -79,7 +93,7 @@ Window {
         }
         Rectangle{
             id: equlizer
-            height: window.height - slider.height
+            height: window.height - sliderNumOfLEDs.height-sliderNumOfFreqBands.height - comboBoxIntervals.height
             width: window.width
             color: window.color
             ListView{
