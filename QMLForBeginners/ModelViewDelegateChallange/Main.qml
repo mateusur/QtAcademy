@@ -50,28 +50,46 @@ Window {
     }
     ColumnLayout{
         anchors.fill: parent
-        Slider {
-            id: slider
-            from: 10
-            value: 50
-            to: 78
+        RowLayout{
             Layout.fillWidth: true
-            height: 30
-            stepSize: 1
-            onValueChanged: {
-                console.log("value: ", value);
+            Label{
+                text: "Number of LEDs in a bar"
+                font.pixelSize: 17
+                color: "white"
+                Layout.preferredWidth: window.width/2
+            }
+            Slider {
+                id: sliderNumOfLEDs
+                from: 10
+                value: 50
+                to: 78
+                Layout.preferredWidth: window.width/2
+                height: 30
+                stepSize: 1
+                onValueChanged: {
+                    console.log("value: ", value);
+                }
             }
         }
-        Slider {
-            id: sliderNumOfFreqBands
-            from: 10
-            value: 50
-            to: 100
+        RowLayout{
             Layout.fillWidth: true
-            height: 30
-            stepSize: 1
-            onValueChanged: {
-                console.log("value: ", value);
+            Label{
+                text: "Number of frequency bands"
+                font.pixelSize: 17
+                color: "white"
+                Layout.preferredWidth: window.width/2
+            }
+            Slider {
+                id: sliderNumOfFreqBands
+                from: 10
+                value: 50
+                to: 100
+                Layout.preferredWidth: window.width/2
+                height: 30
+                stepSize: 1
+                onValueChanged: {
+                    console.log("value: ", value);
+                }
             }
         }
         ComboBox {
