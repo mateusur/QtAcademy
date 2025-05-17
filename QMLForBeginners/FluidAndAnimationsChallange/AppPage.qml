@@ -10,12 +10,10 @@ Page{
     property color pageColor
     property string pageIcon
     property StackView stackViewRef
-    property int windowState: AppPage.CLOSED
-
-
+    property int windowState
+    property int animationDuration: 250
 
     enum WindowState {
-        CLOSED,
         OPEN,
         MAXIMIZED
     }
@@ -24,8 +22,9 @@ Page{
     }
     title: qsTr(pageName)
 
-    width: 400
-    height: 300
+    implicitWidth: 400
+    implicitHeight: 300
+
     Rectangle{
         id:delegateRect
         anchors.fill: parent
@@ -45,9 +44,14 @@ Page{
                 Layout.fillWidth: true
             }
             ToolButton {
+                id: maximizeMinimizeButton
                 text: qsTr("O")
                 onClicked: {
-                   root.windowState = AppPage.MAXIMIZED
+                    if(root.windowState === AppPage.OPEN){
+                        root.windowState = AppPage.MAXIMIZED
+                    } else {
+                        root.windowState = AppPage.OPEN
+                    }
                 }
             }
             ToolButton {
@@ -64,17 +68,32 @@ Page{
             name: "open"
             when: root.windowState === AppPage.OPEN
             PropertyChanges {
-                closeButton.text: "Y"
             }
         },
         State {
             name: "maximized"
             when: root.windowState === AppPage.MAXIMIZED
             PropertyChanges {
-                root.anchors.fill: parent
+                root.width: parent.width
+                root.height: parent.height
+                maximizeMinimizeButton.text: "o"
+                delegateRect.color: Qt.darker(pageColor,1.3)
             }
         }
     ]
+    transitions: [
+        Transition{
+            from: "*"
+            to: "*"
+            NumberAnimation {
+                properties: "width,height"
+                duration: root.animationDuration
+                easing.type: Easing.InOutCubic
+            }
+        }
+    ]
+
+
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.top: parent.top
 }
