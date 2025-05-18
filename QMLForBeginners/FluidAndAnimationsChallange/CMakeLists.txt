@@ -20,6 +20,7 @@ qt_add_qml_module(appFluidAndAnimationsChallange
         RESOURCES assets/attribution.txt assets/home.svg assets/play.svg assets/rss.svg assets/settings.svg assets/table.svg assets/terminal.svg assets/wallpaper.jpg
         QML_FILES AppModel.qml
         QML_FILES ApplicationDelegate.qml
+        QML_FILES AppPage.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
