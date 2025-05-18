@@ -93,24 +93,24 @@ Window {
                     }
                 }
 
-                PropertyAnimation {
-                    id:scaleUp
-                    target: delegateRect
-                    property: "scale"
-                    from: 1.0
-                    to: 1.5
-                    duration: 250
-                }
+                    PropertyAnimation {
+                        id:scaleUp
+                        target: delegateRect
+                        property: "scale"
+                        from: 1.0
+                        to: 1.5
+                        duration: 250
+                    }
 
-                PropertyAnimation {
-                    id:scaleDown
-                    target: delegateRect
-                    property: "scale"
-                    from: 1.5
-                    to: 1.0
-                    duration: 100
+                    PropertyAnimation {
+                        id:scaleDown
+                        target: delegateRect
+                        property: "scale"
+                        from: 1.5
+                        to: 1.0
+                        duration: 100
+                    }
                 }
-            }
         }
 
         model: AppModel {}
