@@ -12,6 +12,7 @@ Page{
     property StackView stackViewRef
     property int windowState
     property int animationDuration: 250
+    property Drawer drawerRef
 
     enum WindowState {
         OPEN,
@@ -49,8 +50,10 @@ Page{
                 onClicked: {
                     if(root.windowState === AppPage.OPEN){
                         root.windowState = AppPage.MAXIMIZED
+                        drawerRef.close()
                     } else {
                         root.windowState = AppPage.OPEN
+                        drawerRef.open()
                     }
                 }
             }
@@ -58,7 +61,7 @@ Page{
                 id: closeButton
                 text: qsTr("X")
                 onClicked: {
-                    stackViewRef.clear()
+                    dialog.open()
                 }
             }
         }
@@ -78,6 +81,7 @@ Page{
                 root.height: parent.height
                 maximizeMinimizeButton.text: "o"
                 delegateRect.color: Qt.darker(pageColor,1.3)
+
             }
         }
     ]
@@ -92,7 +96,28 @@ Page{
             }
         }
     ]
+    Dialog {
+        id: dialog
+        title: pageName
+        anchors.centerIn: parent
+        modal: true
 
+        contentItem: Text {
+            text: `Are you sure you want close ${pageName} window?`
+            wrapMode: Text.Wrap
+            padding: 10
+        }
+
+        standardButtons: Dialog.Ok | Dialog.Cancel
+
+        onAccepted:{
+            stackViewRef.clear()
+        }
+        onRejected:{
+            dialog.close()
+        }
+
+    }
 
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.top: parent.top
