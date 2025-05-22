@@ -101,14 +101,58 @@ Page{
         title: pageName
         anchors.centerIn: parent
         modal: true
-
+        background: Rectangle {
+            radius: 4
+        }
         contentItem: Text {
             text: `Are you sure you want close ${pageName} window?`
             wrapMode: Text.Wrap
             padding: 10
         }
 
-        standardButtons: Dialog.Ok | Dialog.Cancel
+        footer: DialogButtonBox {
+            Button {
+                text: qsTr("Yes")
+                DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
+
+                background: Rectangle {
+                    id: yesButtonBackground
+                    radius: 4
+                    color: "lightgrey"
+                    MouseArea{
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        onEntered: {
+                            yesButtonBackground.color = "grey"
+                        }
+                        onExited: {
+                            yesButtonBackground.color = "lightgrey"
+                        }
+                    }
+                }
+            }
+            Button {
+                id:noButton
+                text: qsTr("No")
+                DialogButtonBox.buttonRole: DialogButtonBox.DestructiveRole
+
+                background: Rectangle {
+                    id: noButtonBackground
+                    radius: 4
+                    color: "lightgrey"
+                    MouseArea{
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        onEntered: {
+                            noButtonBackground.color = "grey"
+                        }
+                        onExited: {
+                            noButtonBackground.color = "lightgrey"
+                        }
+                    }
+                }
+            }
+        }
 
         onAccepted:{
             stackViewRef.clear()
