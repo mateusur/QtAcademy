@@ -33,7 +33,7 @@ The basic version emulates a desktop environment where a row of app icons is dis
   - Support reversible transitions for seamless animations.
 
 ---
-<!--
+
 ## 🚀 Part 2: Extended Version
 
 ### 🧩 Additional Features
@@ -66,13 +66,6 @@ The basic version emulates a desktop environment where a row of app icons is dis
   - Gracefully handle destroyed windows and clean-up logic.
 
 ---
-
-## 📦 Requirements
-- Qt 6.x with QML/Qt Quick modules
-- Basic understanding of `State`, `Transition`, `Behavior`, and `Animation` elements in QML
-
----
-
 ## 🛠️ How to Run
 1. Clone the repository.
 2. Open the `.pro` or `.qmlproject` file in Qt Creator.
