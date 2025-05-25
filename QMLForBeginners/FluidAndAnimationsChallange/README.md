@@ -73,5 +73,6 @@ The basic version emulates a desktop environment where a row of app icons is dis
 
 ---
 
-<!-- ## 📸 Preview
-![Launcher Screenshot](path/to/screenshot.png) --> 
+## 📸 Preview
+![Launcher Screenshot](readmeAssets/screen1.png)  
+![Launcher Screenshot Scale Animation](readmeAssets/screen3.png)
