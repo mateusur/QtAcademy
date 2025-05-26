@@ -76,3 +76,4 @@ The basic version emulates a desktop environment where a row of app icons is dis
 ## 📸 Preview
 ![Launcher Screenshot](readmeAssets/screen1.png)  
 ![Launcher Screenshot Scale Animation](readmeAssets/screen3.png)
+![Launcher Screenshot Home Page](readmeAssets/screen4.png)
