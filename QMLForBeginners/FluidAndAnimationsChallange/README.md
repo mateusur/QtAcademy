@@ -78,4 +78,4 @@ The basic version emulates a desktop environment where a row of app icons is dis
 ![Launcher Screenshot Scale Animation](readmeAssets/screen3.png)
 ![Launcher Screenshot Home Page](readmeAssets/screen4.png)
 ![Launcher Screenshot Home Page full screen](readmeAssets/screen5.png)
-
+![Home Page exit dialog](readmeAssets/screen6.png)
