@@ -122,7 +122,7 @@ Window {
                 delegate: LedBar {
                     width: (ListView.view.width - (root.spacing*(root.count-1)))/root.count
                     height: ListView.view.height
-                    ledNumber: slider.value
+                    ledNumber: sliderNumOfLEDs.value
                 }
             }
         }

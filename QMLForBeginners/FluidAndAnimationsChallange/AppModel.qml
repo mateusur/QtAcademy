@@ -5,7 +5,7 @@ ListModel {
 
     // note we must convert appColors and urls from strings later
     ListElement {
-        appName: "home"
+        appName: "Home"
         appColor: "red"
         appIcon: "assets/home.svg"
     }
